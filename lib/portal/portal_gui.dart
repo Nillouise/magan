@@ -40,6 +40,7 @@ class _PortalState extends State<PortalView> {
       _Portal("白白胖胖", "https://www.zhihu.com/people/long-fang-57"),
       _Portal("磊哥", "无，上微信号吧"),
       _Portal("洪颢", "https://twitter.com/HAOHONG_CFA"),
+      _Portal("youtrack", "https://nillouise.youtrack.cloud/dashboard"),
     ];
 
     return ScaffoldPage.scrollable(

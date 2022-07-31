@@ -1,6 +1,6 @@
-# observer
+# magan
 
-observe web info
+magan web info
 
 ## Getting Started
 
