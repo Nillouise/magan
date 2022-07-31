@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:intl/intl.dart';
-import 'package:observer/mitbbs/fetch_data.dart';
-import 'package:observer/mitbbs/mitbbs_backend.dart';
+import 'package:magan/mitbbs/fetch_data.dart';
+import 'package:magan/mitbbs/mitbbs_backend.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 

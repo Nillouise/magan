@@ -1,7 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
-import 'package:observer/mitbbs/mitbbs_backend.dart';
+import 'package:magan/mitbbs/mitbbs_backend.dart';
+import 'package:magan/portal/portal_gui.dart';
+import 'package:magan/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:url_launcher/link.dart';
@@ -17,7 +20,6 @@ import 'screens/mobile.dart';
 import 'screens/others.dart';
 import 'screens/settings.dart';
 import 'screens/typography.dart';
-import 'theme.dart';
 import 'weibo/test.dart';
 
 const String appTitle = 'Fluent UI Showcase for Flutter';
@@ -189,12 +191,12 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
           // It doesn't look good when resizing from compact to open
           // PaneItemHeader(header: Text('User Interaction')),
           PaneItem(
-            icon: const Icon(FluentIcons.checkbox_composite),
-            title: const Text('Inputs'),
+            icon: const Icon(material.Icons.home),
+            title: const Text('Portal'),
           ),
           PaneItem(
             icon: const Icon(FluentIcons.text_field),
-            title: const Text('Forms'),
+            title: const Text('Mitbbs'),
           ),
           PaneItemSeparator(),
           PaneItem(
@@ -247,6 +249,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
         // const InputsPage(),
         // const Forms(),
         // const ColorsPage(),
+        const PortalView(),
         const MitbbsView(),
         const TypographyPage(),
         const Mobile(),
