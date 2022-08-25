@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:magan/mitbbs/fetch_data.dart';
 import 'package:magan/mitbbs/mitbbs_backend.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MitbbsView extends StatefulWidget {
@@ -32,7 +31,7 @@ class _MitbbsState extends State<MitbbsView> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
   }
 
@@ -60,54 +59,45 @@ class _MitbbsState extends State<MitbbsView> {
   @override
   Widget build(BuildContext context) {
     // tiezis = [Tiezi()..author = "test"..link="l"..title="ok",Tiezi()..author = "test"..link="l"..title="ok"  ];
-    return ScaffoldPage.scrollable(
-        header: const PageHeader(title: Text('Mitbbs')),
+    return MaterialApp(
+      title: 'Mitbbs',
+      home: Row(
         children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 200,
-                child: TextBox(
-                  controller: _controller,
-                  placeholder: MitbbsBackend().mitbbsConfig?.proxyHost,
-                  onChanged: (x) {
-                    MitbbsBackend().mitbbsConfig?.proxyHost = x;
-                  },
-                ),
-              ),
-              Button(
-                  child: const Text('Refresh'),
-                  onPressed: () async {
-                    refresh();
-                  }),
-              const SizedBox(width: 10.0),
-              Button(
-                  child: const Text('Clear'),
-                  onPressed: () async {
-                    clear();
-                  }),
-              const SizedBox(width: 10.0),
-              Text(MitbbsBackend().refreshTime == null
-                  ? "have no refresh"
-                  : DateFormat('MM-dd – kk:mm').format(MitbbsBackend().refreshTime!)),
-              const SizedBox(width: 10.0),
-              if (refreshStatus) const ProgressRing(),
-              if (refreshExceptionStuatus) const Icon(FluentIcons.warning)
-            ],
-          ),
-          const SizedBox(height: 10.0),
+          TextButton(
+              child: const Text('Refresh'),
+              onPressed: () async {
+                refresh();
+              }),
+          const SizedBox(width: 10.0),
+          TextButton(
+              child: const Text('Clear'),
+              onPressed: () async {
+                clear();
+              }),
+          const SizedBox(width: 10.0),
+          Text(MitbbsBackend().refreshTime == null
+              ? "have no refresh"
+              : DateFormat('MM-dd – kk:mm')
+              .format(MitbbsBackend().refreshTime!)),
+          const SizedBox(width: 10.0),
+          if (refreshStatus) const Icon(Icons.downloading),
+          if (refreshExceptionStuatus) const Icon(Icons.warning),
           Wrap(
             spacing: 10,
             runSpacing: 10,
             children: List.generate(MitbbsBackend().tiezis.length, (index) {
-              return TappableListTile(
-                title: Text('${MitbbsBackend().tiezis[index].author}:${MitbbsBackend().tiezis[index].title}'),
+              return ListTile(
+                title: Text(
+                    '${MitbbsBackend().tiezis[index].author}:${MitbbsBackend()
+                        .tiezis[index].title}'),
                 onTap: () {
-                  launch(MitbbsBackend().tiezis[index].link);
+                  launchUrl(Uri.parse(MitbbsBackend().tiezis[index].link));
                 },
               );
             }),
-          ),
-        ]);
+          )
+        ],
+      ),
+    );
   }
 }

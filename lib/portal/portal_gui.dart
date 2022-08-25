@@ -1,7 +1,5 @@
-import 'dart:async';
 
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class _Portal {
@@ -43,25 +41,36 @@ class _PortalState extends State<PortalView> {
       _Portal("youtrack", "https://nillouise.youtrack.cloud/dashboard"),
     ];
 
-    return ScaffoldPage.scrollable(
-        header: const PageHeader(title: Text('Portal')),
-        children: [
-          Column(children: [
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: List.generate(list.length, (index) {
-                return TappableListTile(
-                  title: Text('${list[index].title}'),
-                  onTap: () {
-                    if (list[index].link.startsWith("http")) {
-                      launchUrl(Uri.parse(list[index].link));
-                    }
-                  },
-                );
-              }),
-            )
-          ])
-        ]);
+    return ListView.builder(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(20.0),
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text('${list[index].title}'),
+            onTap: () {
+              if (list[index].link.startsWith("http")) {
+                launchUrl(Uri.parse(list[index].link));
+              }
+            },
+          );
+        });
+
+    return ListView(children: [
+      Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: List.generate(list.length, (index) {
+          return ListTile(
+            title: Text('${list[index].title}'),
+            onTap: () {
+              if (list[index].link.startsWith("http")) {
+                launchUrl(Uri.parse(list[index].link));
+              }
+            },
+          );
+        }),
+      )
+    ]);
   }
 }
